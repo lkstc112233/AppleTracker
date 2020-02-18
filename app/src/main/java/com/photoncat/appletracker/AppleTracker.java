@@ -1,22 +1,22 @@
 package com.photoncat.appletracker;
 
-public class AppleTracker {
+class AppleTracker {
     String left_text;
     String middle_text;
     String right_text;
     String left_button;
     String middle_button;
     String right_button;
-    String left_text_real;
-    String middle_text_real;
-    String right_text_real;
+    private String left_text_real;
+    private String middle_text_real;
+    private String right_text_real;
     private boolean recording;
     private int first = -1;
     private int second = -1;
     private int second_last = -1;
     private int last = -1;
 
-    public void reset() {
+    void reset() {
         left_text = "";
         middle_text = "";
         right_text = "";
@@ -57,7 +57,7 @@ public class AppleTracker {
         }
     }
 
-    public void record() {
+    private void record() {
         recording = true;
         left_button = "1";
         middle_button = "3";

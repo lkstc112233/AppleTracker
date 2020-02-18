@@ -72,7 +72,7 @@
         android:textSize="72dp"
         android:text="PlaceHolder"
         app:layout_constraintBottom_toTopOf="@+id/button_middle"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activate_camera_button"
         app:layout_constraintEnd_toStartOf="@+id/textview_right"
         app:layout_constraintStart_toEndOf="@+id/textview_left" />
 
@@ -90,7 +90,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_left"
         app:layout_constraintEnd_toStartOf="@+id/textview_middle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/activate_camera_button" />
 
     <TextView
         android:id="@+id/textview_right"
@@ -106,5 +106,18 @@
         app:layout_constraintBottom_toTopOf="@+id/button_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textview_middle"
+        app:layout_constraintTop_toBottomOf="@+id/activate_camera_button" />
+
+    <Button
+        android:id="@+id/activate_camera_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Activate Camera"
+        android:onClick="activateCameraHandler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
