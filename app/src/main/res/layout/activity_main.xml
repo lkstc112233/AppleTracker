@@ -72,7 +72,7 @@
         android:textSize="72dp"
         android:text="PlaceHolder"
         app:layout_constraintBottom_toTopOf="@+id/button_middle"
-        app:layout_constraintTop_toBottomOf="@+id/activate_camera_button"
+        app:layout_constraintTop_toBottomOf="@+id/camera_frame"
         app:layout_constraintEnd_toStartOf="@+id/textview_right"
         app:layout_constraintStart_toEndOf="@+id/textview_left" />
 
@@ -90,7 +90,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_left"
         app:layout_constraintEnd_toStartOf="@+id/textview_middle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activate_camera_button" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_frame" />
 
     <TextView
         android:id="@+id/textview_right"
@@ -106,18 +106,31 @@
         app:layout_constraintBottom_toTopOf="@+id/button_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textview_middle"
-        app:layout_constraintTop_toBottomOf="@+id/activate_camera_button" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_frame" />
 
-    <Button
-        android:id="@+id/activate_camera_button"
+    <FrameLayout
+        android:id="@+id/camera_frame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Activate Camera"
-        android:onClick="activateCameraHandler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textview_middle">
+        <Button
+            android:id="@+id/activate_camera_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Activate Camera"
+            android:onClick="activateCameraHandler" />
+
+        <ViewStub
+            android:id="@+id/camera_stub"
+            android:inflatedId="@+id/color_blob_detection_activity_surface_view"
+            android:layout="@layout/activity_sample"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
