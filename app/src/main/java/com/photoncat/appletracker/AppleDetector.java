@@ -13,12 +13,26 @@ import java.util.List;
 
 public class AppleDetector {
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
-    private final static Scalar mInRangeLowerBound = new Scalar(0, 0, 190, 0);
-    private final static Scalar mInRangeHigherBound = new Scalar(50, 50, 255, 255);
     private final static org.opencv.core.Size mGaussianBlurRange = new org.opencv.core.Size(3,3);
     private final static org.opencv.core.Point mErodeAnchor = new org.opencv.core.Point(-1, -1);
 
+    private final Scalar mInRangeLowerBound = new Scalar(0, 0, 190, 0);
+    private final Scalar mInRangeHigherBound = new Scalar(50, 50, 255, 255);
+    private final Scalar mBlackScalar = new Scalar(0, 0, 0, 255);
+    public int rLow = 190;
+    public int rHigh = 255;
+    public int gLow = 0;
+    public int gHigh = 50;
+    public int bLow = 0;
+    public int bHigh = 50;
+
+    public void updateBounds() {
+        mInRangeLowerBound.set(new double[]{bLow, gLow, rLow, 0});
+        mInRangeHigherBound.set(new double[]{bHigh, gHigh, rHigh, 255});
+    }
+
     // Cache
+    private Mat mPartialResultMat = new Mat();
     private Mat mRangedMat = new Mat();
     private Mat mBlurredMat = new Mat();
     private Mat mThresholdedMat = new Mat();
@@ -26,10 +40,12 @@ public class AppleDetector {
     private Mat mDilatedMat = new Mat();
     private Mat mEdgedMat = new Mat();
     private Mat mHierarchy = new Mat();
- 
+
     public void process(Mat rgbaImage) {
         Core.inRange(rgbaImage, mInRangeLowerBound, mInRangeHigherBound, mRangedMat);
-        mRangedMat.copyTo(rgbaImage);
+        mPartialResultMat.setTo(mBlackScalar);
+        rgbaImage.copyTo(mPartialResultMat, mRangedMat);
+        mPartialResultMat.copyTo(rgbaImage);
         Imgproc.GaussianBlur(mRangedMat, mBlurredMat, mGaussianBlurRange, 0);
         Imgproc.threshold(mBlurredMat, mThresholdedMat, 64, 255, Imgproc.THRESH_BINARY);
         Imgproc.erode(mThresholdedMat, mErodedMat, new Mat(), mErodeAnchor, 3);

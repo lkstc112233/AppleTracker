@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
-        mDetector.processFully(mRgba);
+        mDetector.process(mRgba);
         List<MatOfPoint> contours = mDetector.getContours();
         Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR, 3);
         Mat transformed = mRgba.t();
@@ -243,5 +243,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     }
 
     public void randomActionHandler(MenuItem item) {
+        SetSensitivityDialogFragment dialogFragment = new SetSensitivityDialogFragment();
+        dialogFragment.detector = mDetector;
+        dialogFragment.show(getSupportFragmentManager(), "SensitivityDialogFragment");
     }
 }
