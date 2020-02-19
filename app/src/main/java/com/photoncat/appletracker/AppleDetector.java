@@ -13,8 +13,8 @@ import java.util.List;
 
 public class AppleDetector {
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
-    private final static Scalar mInRangeLowerBound = new Scalar(0, 0, 190);
-    private final static Scalar mInRangeHigherBound = new Scalar(50, 50, 255);
+    private final static Scalar mInRangeLowerBound = new Scalar(0, 0, 190, 0);
+    private final static Scalar mInRangeHigherBound = new Scalar(50, 50, 255, 255);
     private final static org.opencv.core.Size mGaussianBlurRange = new org.opencv.core.Size(3,3);
     private final static org.opencv.core.Point mErodeAnchor = new org.opencv.core.Point(-1, -1);
 
@@ -26,7 +26,7 @@ public class AppleDetector {
     private Mat mDilatedMat = new Mat();
     private Mat mEdgedMat = new Mat();
     private Mat mHierarchy = new Mat();
-
+ 
     public void process(Mat rgbaImage) {
         Core.inRange(rgbaImage, mInRangeLowerBound, mInRangeHigherBound, mRangedMat);
         mRangedMat.copyTo(rgbaImage);
