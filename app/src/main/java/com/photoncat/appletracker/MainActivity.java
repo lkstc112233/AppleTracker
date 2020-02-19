@@ -9,6 +9,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewStub;
@@ -68,6 +71,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             }
         }
     };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actions_main, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,5 +240,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         transformed.release();
         Imgproc.resize(mRgbaT, mRgba, mRgba.size());
         return mRgba;
+    }
+
+    public void randomActionHandler(MenuItem item) {
     }
 }
