@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     private boolean mIsColorSelected = false;
     private Mat mRgba;
+    private Mat mRgbaT;
     private Scalar mBlobColorRgba;
     private Scalar mBlobColorHsv;
     private AppleDetector mDetector;
@@ -204,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     @Override
     public void onCameraViewStarted(int width, int height) {
         mRgba = new Mat(height, width, CvType.CV_8UC4);
+        mRgbaT = new Mat(width, height, CvType.CV_8UC4);
         mDetector = new AppleDetector();
         mSpectrum = new Mat();
         mBlobColorRgba = new Scalar(255);
@@ -220,9 +222,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
-        mDetector.process(mRgba);
+        mDetector.processFully(mRgba);
         List<MatOfPoint> contours = mDetector.getContours();
         Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR, 3);
+        Mat transformed = mRgba.t();
+        Core.flip(transformed, mRgbaT, 1);
+        transformed.release();
+        Imgproc.resize(mRgbaT, mRgba, mRgba.size());
         return mRgba;
     }
 }
