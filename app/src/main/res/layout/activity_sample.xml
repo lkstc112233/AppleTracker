@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<org.opencv.android.JavaCameraView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/color_blob_detection_activity_surface_view" />
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/camera_comment_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Place Holder"
+        app:layout_constraintBottom_toTopOf="@+id/color_blob_detection_activity_surface_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <org.opencv.android.JavaCameraView
+        android:id="@+id/color_blob_detection_activity_surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camera_comment_text_view"
+        tools:layout_alignTop="@+id/camera_comment_text_view" />
+
+</android.support.constraint.ConstraintLayout>

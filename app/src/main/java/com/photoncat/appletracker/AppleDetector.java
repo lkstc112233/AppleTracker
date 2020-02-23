@@ -25,6 +25,7 @@ public class AppleDetector {
     public int gHigh = 50;
     public int bLow = 0;
     public int bHigh = 50;
+    public String comment = "";
 
     public void updateBounds() {
         mInRangeLowerBound.set(new double[]{bLow, gLow, rLow, 0});

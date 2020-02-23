@@ -126,7 +126,8 @@
             android:text="Activate Camera"
             android:onClick="activateCameraHandler" />
 
-        <ViewStub
+        <android.support.constraint.ConstraintLayout
+            android:visibility="gone"
             android:id="@+id/camera_stub"
             android:inflatedId="@+id/color_blob_detection_activity_surface_view"
             android:layout="@layout/activity_sample"

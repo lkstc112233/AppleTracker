@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     TextView left_text;
     TextView middle_text;
     TextView right_text;
+    TextView camera_comment;
     Button left_button;
     Button middle_button;
     Button right_button;
@@ -131,6 +132,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         left_button.setText(appleTracker.left_button);
         middle_button.setText(appleTracker.middle_button);
         right_button.setText(appleTracker.right_button);
+        if (camera_comment != null && mDetector != null) {
+            camera_comment.setText(mDetector.comment);
+        }
     }
 
     private void reset() {
@@ -193,7 +197,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     private void showCamaraView() {
         ViewStub viewStub = findViewById(R.id.camera_stub);
-        mOpenCvCameraView = (CameraBridgeViewBase) viewStub.inflate();
+        viewStub.inflate();
+
+        camera_comment = findViewById(R.id.camera_comment_text_view);
 
         mOpenCvCameraView = findViewById(R.id.color_blob_detection_activity_surface_view);
         mOpenCvCameraView.setCvCameraViewListener(this);
@@ -205,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         } else {
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
+        updateView();
     }
 
     private void launchSampleActivity() {
@@ -239,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         Core.flip(transformed, mRgbaT, 1);
         transformed.release();
         Imgproc.resize(mRgbaT, mRgba, mRgba.size());
+        runOnUiThread(() -> updateView());
         return mRgba;
     }
 
